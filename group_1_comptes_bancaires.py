@@ -26,6 +26,20 @@ comptes = [
 {"numero": 2, "titulaire": "Moussa Diop", "solde": 75000},
 {"numero": 3, "titulaire": "Fatou Sarr", "solde": 320000},
 ]
+
+
+
+def menu():
+    print("\n===== AGENCE CESAG BANK =====")
+    print("1. Afficher tous les comptes")
+    print("2. Consulter le solde d'un compte")
+    print("3. Créer un nouveau compte")
+    print("4. Effectuer un dépôt")
+    print("5. Effectuer un retrait")
+    print("6. Effectuer un transfert entre deux comptes")
+    print("7. Quitter")
+    print("==============================")
+    
 # si tu veut modifier tien compte des indications puis  laisse des commentaire  pour que je sache tes modification   
     #fonction recuper du cour 
 def saisir_choix_menu():
@@ -36,7 +50,7 @@ def saisir_choix_menu():
         choix = input("Votre choix : ")
     return int(choix)
 
-def trouver_compte( comptes, numero):
+def trouver_compte( comptes,numero):
     for compte in comptes:
         if compte ["numero"] == numero:
             return comptes
@@ -55,25 +69,48 @@ def afficher_comptes(comptes):
 def consulter_solde():
     for compte in comptes:
         print("======================votre solde", compte["titulaire"],"==========================")
-# def creer_compte():
+
+# verifie le solde du compte
+def solde_valide():
+    solde_valide = False
+    while not solde_valide:
+        enter = input(" votre solde initial (en cfa) : ")
+        try:
+            solde = float(enter)
+            if solde>=0:
+                solde_valide = True
+            else : 
+                print("Erreur !!! votre solde ne peut etre inferieur a 0 ")
+        except ValueError:
+            print("enter un nombre valide")
+def plus_numero():
+    for compte in comptes:
+        if comptes["numero"]>plus_numero:
+            plus_numero =compte["numero"]             
+def nouveau_compte():
+    nouveau_compte = {"numero":plus_numero+1,"titulaire":titulaire,"solde":solde}
+    comptes.append(nouveau_compte)
+    print("bravo, compte créé : numero", nouveau_compte["numero"],titulaire,solde,"cfa")
+
+
+def creer_un_compte():
+    titulaire = input("non du client: ")
+    # si lutisisateur fais entrer sans renseigner de valeurs
+    while titulaire.strip()=="":
+        print("erreur!!!!, vous devez renseigner une nom")
+        titulaire = input("non du client: ")
+    solde_valide()
+    plus_numero
+    nouveau_compte()
+        
+# def depot():
+
+# def retrais():
+
  
-# def deposer():
+# def transfer():
 
-# def retirer():
 
- 
-# def transferer():
-
-def menu():
-    print("\n===== AGENCE CESAG BANK =====")
-    print("1. Afficher tous les comptes")
-    print("2. Consulter le solde d'un compte")
-    print("3. Créer un nouveau compte")
-    print("4. Effectuer un dépôt")
-    print("5. Effectuer un retrait")
-    print("6. Effectuer un transfert entre deux comptes")
-    print("7. Quitter")
-    print("==============================")
 #def main():
 def main():
     print("====================Bienvenue à l'Agence CESAG BANK========================")
@@ -86,3 +123,14 @@ def main():
         afficher_comptes(comptes)
     elif choix == 2:
         consulter_solde()
+    elif choix==3:
+        creer_un_compte()
+    elif choix==4:
+        depot()
+    elif choix==5:
+        retrais()
+    elif choix==6:
+        transfer()
+    elif choix ==7:
+        print("===============Merci d'avoir utilisé CESAG BANK================")
+        print("=========================À bientôt======================")
