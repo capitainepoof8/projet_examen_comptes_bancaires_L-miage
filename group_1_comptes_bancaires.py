@@ -1,6 +1,7 @@
 #debut code le 9 juin /2026
 # creation de la structure de donner et des fonction principal
-#debut code le 9 juin /2026
+#modification 10 juin /2026
+#avance sur les fonctions
 #=============stcture code =========================
 
 # base de donnee
@@ -20,6 +21,13 @@
 # Votre choix :
 
 # execute test : python group_1_comptes_bancaires.py
+#================================ INPORTANT =================================
+#si tu fais des modification du code tu a juste a faire :
+# git init
+# git add .
+# git commit -m "nom de la modification"
+# git branch -M main
+# git push -u origin main
 
 comptes = [
 {"numero": 1, "titulaire": "Awa Ndiaye", "solde": 150000},
