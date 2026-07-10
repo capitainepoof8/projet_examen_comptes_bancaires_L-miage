@@ -19,6 +19,7 @@
 #==============================
 # Votre choix :
 
+# execute test : python group_1_comptes_bancaires.py
 
 comptes = [
 {"numero": 1, "titulaire": "Awa Ndiaye", "solde": 150000},
@@ -35,16 +36,25 @@ def saisir_choix_menu():
         choix = input("Votre choix : ")
     return int(choix)
 
-# def trouver_compte():
- 
+def trouver_compte( comptes, numero):
+    for compte in comptes:
+        if compte ["numero"] == numero:
+            return comptes
+    return None
+
+
 # def saisir_numero_compte_existant():
  
 # def saisir_montant_positif():
 
-# def afficher_comptes():
+def afficher_comptes(comptes):
+    print("=========================les differents comptes==============================")
+    for compte in comptes:
+        print(compte["numero"], compte["titulaire"], compte["solde"],"cfa")
  
-# def consulter_solde():
-
+def consulter_solde():
+    for compte in comptes:
+        print("======================votre solde", compte["titulaire"],"==========================")
 # def creer_compte():
  
 # def deposer():
@@ -64,5 +74,15 @@ def menu():
     print("6. Effectuer un transfert entre deux comptes")
     print("7. Quitter")
     print("==============================")
-# def main():
-# ici ont devra cree des chois avec en condition qui retourne les diferent fonction
+#def main():
+def main():
+    print("====================Bienvenue à l'Agence CESAG BANK========================")
+    quitter = False
+    while not quitter:
+        menu()
+        choix = saisir_choix_menu(menu)
+        
+    if choix == 1 :
+        afficher_comptes(comptes)
+    elif choix == 2:
+        consulter_solde()
