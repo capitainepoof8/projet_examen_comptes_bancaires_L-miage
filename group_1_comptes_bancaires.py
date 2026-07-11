@@ -65,9 +65,31 @@ def trouver_compte( comptes,numero):
     return None
 
 
-# def saisir_numero_compte_existant():
+ def saisir_numero_compte_existant(compte, message):
+     #demande un numero de compte tant qu'il ne correspond a aucun compte existant
+  while True:
+    numero_comptes=int (input(message))
+    
+    for compte in comptes:
+        if compte ["numero"] == numero_comptes:
+            print("compte valide")
+            return numero_comptes
+    print("compte introuvable, reessayez")
+
+numero_comptes_existant= saisir_numero_compte_existant(comptes, "entrer le numero de compte : ")
+
  
-# def saisir_montant_positif():
+ def saisir_montant_positif(message):
+      #demande un montant tant qu'il n'est pas un nombre strictement positif
+    while True:
+           montant=float(input(message))
+           if not (montant > 0):
+               print("le montant doit etre supperieure a 0. recommencez.")
+               continue
+           return montant 
+
+montant_positif= saisir_montant_posif("entrer un montant : ")
+
 
 def afficher_comptes(comptes):
     print("=========================les differents comptes==============================")
