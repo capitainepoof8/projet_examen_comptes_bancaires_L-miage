@@ -2,12 +2,12 @@
 # creation de la structure de donner et des fonction principal
 #modification 10 juin /2026
 #avance sur les fonctions
-#=============stcture code =========================
+#=============structure code =========================
 
 # base de donnee
 # -----------------------la fonctions menu
 # -----------------------la fonction de choix
-# -----------------------la fonction de 
+
 
 #===== AGENCE CESAG BANK =====
 # 1. Afficher tous les comptes
@@ -47,9 +47,9 @@ def menu():
     print("6. Effectuer un transfert entre deux comptes")
     print("7. Quitter")
     print("==============================")
-    
-# si tu veut modifier tien compte des indications puis  laisse des commentaire  pour que je sache tes modification   
-    #fonction recuper du cour 
+
+# si tu veut modifier tien compte des indications puis  laisse des commentaire  pour que je sache tes modification
+    #fonction recuper du cour
 def saisir_choix_menu():
     # demande le choix tant qu'il n'est pas entre 1 et 7
     choix = input("Votre choix : ")
@@ -61,13 +61,31 @@ def saisir_choix_menu():
 def trouver_compte( comptes,numero):
     for compte in comptes:
         if compte ["numero"] == numero:
-            return comptes
+            return compte
     return None
 
 
-# def saisir_numero_compte_existant():
- 
-# def saisir_montant_positif():
+def saisir_numero_compte_existant(message):
+    numero = input(message)
+    while not numero.isdigit() or trouver_compte(comptes, int(numero)) is None:
+        print("ce compte n'existe pas")
+        numero = input(message)
+    return int(numero)
+
+def saisir_montant_positif(message):
+    # demande un montant tant qu'il n'est pas strictement positif
+    montant_valide = False
+    while not montant_valide:
+        enter = input(message)
+        try:
+            montant = float(enter)
+            if montant > 0:
+                montant_valide = True
+            else:
+                print("Erreur : le montant doit être supérieur à 0")
+        except ValueError:
+            print("enter un nombre valide")
+    return montant
 
 def afficher_comptes(comptes):
     print("=========================les differents comptes==============================")
@@ -81,64 +99,122 @@ def consulter_solde():
 # verifie le solde du compte
 def solde_valide():
     solde_valide = False
+    solde = None
     while not solde_valide:
         enter = input(" votre solde initial (en cfa) : ")
         try:
             solde = float(enter)
             if solde>=0:
                 solde_valide = True
-            else : 
+            else :
                 print("Erreur !!! votre solde ne peut etre inferieur a 0 ")
         except ValueError:
             print("enter un nombre valide")
+    return solde
+
+
+def consulter_solde():
+    #demende d'un compte existants puis ont  affichons le solde
+    numero = saisir_numero_compte_existant("numero du compte : ")
+    compte = trouver_compte(comptes,numero)
+    print("\n================votre solde", compte["titulaire"], ":", compte["solde"], "cfa===============================")
+
 def plus_numero():
+    # cherche le plus grand numero de compte existant
+    plus_grand = 0
     for compte in comptes:
-        if comptes["numero"]>plus_numero:
-            plus_numero =compte["numero"]             
-def nouveau_compte():
-    nouveau_compte = {"numero":plus_numero+1,"titulaire":titulaire,"solde":solde}
+        if compte["numero"] > plus_grand:
+            plus_grand = compte["numero"]
+    return plus_grand
+
+
+def nouveau_compte(titulaire, solde):
+    nouveau_numero = plus_numero() + 1
+    nouveau_compte = {"numero": nouveau_numero, "titulaire": titulaire, "solde": solde}
     comptes.append(nouveau_compte)
-    print("bravo, compte créé : numero", nouveau_compte["numero"],titulaire,solde,"cfa")
+    print("bravo, compte créé : numero", nouveau_compte["numero"], titulaire ,solde,"cfa")
 
 
 def creer_un_compte():
     titulaire = input("non du client: ")
-    # si lutisisateur fais entrer sans renseigner de valeurs
+    # si lutisisateur fais entrer sans renseigner de valeurs dans la console
     while titulaire.strip()=="":
         print("erreur!!!!, vous devez renseigner une nom")
         titulaire = input("non du client: ")
-    solde_valide()
-    plus_numero
-    nouveau_compte()
-        
-# def depot():
-
-# def retrais():
-
- 
-# def transfer():
+    solde = solde_valide()
+    nouveau_compte(titulaire, solde)
 
 
-#def main():
+def depot():
+    # ont recupere le compte si valide ont credite (depose de largent ) le compte
+    numero = saisir_numero_compte_existant("numero du compte a credite : ")
+    montant = saisir_montant_positif("montant a deposer : ")
+    compte = trouver_compte(comptes, numero)
+    compte["solde"] = compte["solde"] + montant
+    print("depot effectué. nouveau solde de", compte["titulaire"], ":", compte["solde"], "cfa")
+
+
+def retrais():
+    #ont recupere les le compte  a debiter puis ont valide le retrais 
+    numero = saisir_numero_compte_existant("numero du compte a debiter : ")
+    montant = saisir_montant_positif("montant a retirer : ")
+    compte = trouver_compte(comptes, numero)
+    if montant > compte["solde"]:
+        print("Erreur : solde insuffisant. solde actuel :", compte["solde"], "cfa")
+    else:
+        compte["solde"] = compte["solde"] - montant
+        print("=====================================================================================")
+        print("retrait effectué. nouveau solde de", compte["titulaire"], ":", compte["solde"], "cfa")
+    
+# fais  j'esserais de simplifier le plus pour que tu comprennne 
+#mais simplement cest pour la 6 option qui dit un transfere entre des compte de la meme entreprise
+
+def transfer():
+    # recupere le compte bebiteur et crediteur 
+    numero_source = saisir_numero_compte_existant("numero du compte source : ")
+    numero_destination = saisir_numero_compte_existant("numero du compte destination : ")
+    # ont verifie si si l'utilusateur entre les meme compte si oui ont luis dit c'st pas possible
+    while numero_destination == numero_source:
+        print("Erreur : la destination doit etre differente de la source.")
+        numero_destination = saisir_numero_compte_existant("numero du compte destination : ")
+    montant = saisir_montant_positif("montant a transferer : ")
+# si compte existe alors ont doit verifier si il peut etre debiter  si oui ont accepete l'operation
+    source = trouver_compte(comptes, numero_source)
+    destination = trouver_compte(comptes, numero_destination)
+
+    if montant > source["solde"]:
+        print("Erreur : solde insuffisant sur le compte de", source["titulaire"])
+    else:
+        source["solde"] = source["solde"] - montant
+        destination["solde"] = destination["solde"] + montant
+        print("transfert effectué :", montant, "cfa de", source["titulaire"], "vers", destination["titulaire"])
+        print("nouveau solde de", source["titulaire"], ":", source["solde"], "cfa")
+        print("nouveau solde de", destination["titulaire"], ":", destination["solde"], "cfa")
+
+# executeur main  dui a pour but de nous permetre de naviguer a travers nos option: choix
 def main():
     print("====================Bienvenue à l'Agence CESAG BANK========================")
     quitter = False
     while not quitter:
         menu()
-        choix = saisir_choix_menu(menu)
-        
-    if choix == 1 :
-        afficher_comptes(comptes)
-    elif choix == 2:
-        consulter_solde()
-    elif choix==3:
-        creer_un_compte()
-    elif choix==4:
-        depot()
-    elif choix==5:
-        retrais()
-    elif choix==6:
-        transfer()
-    elif choix ==7:
-        print("===============Merci d'avoir utilisé CESAG BANK================")
-        print("=========================À bientôt======================")
+        choix = saisir_choix_menu()
+        if choix == 1 :
+            afficher_comptes(comptes)
+        elif choix == 2:
+            consulter_solde()
+        elif choix==3:
+            creer_un_compte()
+        elif choix==4:
+            depot()
+        elif choix==5:
+            retrais()
+        elif choix==6:
+            transfer()
+        elif choix ==7:
+            print("===============Merci d'avoir utilisé CESAG BANK================")
+            print("=========================À bientôt======================")
+            quitter = True
+
+# ce ci  na pas but foncierement a obligatoire elle permet juste de faire une inportation du projet donc tu a le choix si ont enleve ou pas
+if __name__ == "__main__":
+    main()
