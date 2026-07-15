@@ -132,7 +132,8 @@ def nouveau_compte(titulaire, solde):
     nouveau_numero = plus_numero() + 1
     nouveau_compte = {"numero": nouveau_numero, "titulaire": titulaire, "solde": solde}
     comptes.append(nouveau_compte)
-    print("bravo, compte créé : numero", nouveau_compte["numero"], titulaire ,solde,"cfa")
+    print("bravo, compte créé : numero",nouveau_compte["numero"],)
+    print(titulaire ,solde,"cfa")
 
 
 def creer_un_compte():
@@ -151,7 +152,8 @@ def depot():
     montant = saisir_montant_positif("montant a deposer : ")
     compte = trouver_compte(comptes, numero)
     compte["solde"] = compte["solde"] + montant
-    print("depot effectué. nouveau solde de", compte["titulaire"], ":", compte["solde"], "cfa")
+    print("depot effectué. nouveau solde de", compte["titulaire"],)
+    print(compte["solde"], "cfa")
 
 
 def retrais():
@@ -164,7 +166,8 @@ def retrais():
     else:
         compte["solde"] = compte["solde"] - montant
         print("=====================================================================================")
-        print("retrait effectué. nouveau solde de", compte["titulaire"], ":", compte["solde"], "cfa")
+        print("retrait effectué. nouveau solde de", compte["titulaire"])
+        print(compte["solde"], "cfa")
     
 # fais  j'esserais de simplifier le plus pour que tu comprennne 
 #mais simplement cest pour la 6 option qui dit un transfere entre des compte de la meme entreprise
