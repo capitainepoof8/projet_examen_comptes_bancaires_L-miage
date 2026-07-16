@@ -149,7 +149,6 @@ def creer_un_compte(comptes):
 
 def depot(comptes):
     # ont recupere le compte si valide ont credite (depose de largent ) le compte
-    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous
     numero = saisir_numero_compte_existant(comptes, "numero du compte a credite : ")
     montant = saisir_montant_positif("montant a deposer : ")
     compte = trouver_compte(comptes, numero)
@@ -160,7 +159,7 @@ def depot(comptes):
 
 def retrais(comptes):
     #ont recupere les le compte  a debiter puis ont valide le retrais 
-    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous
+
     numero = saisir_numero_compte_existant(comptes, "numero du compte a debiter : ")
     montant = saisir_montant_positif("montant a retirer : ")
     compte = trouver_compte(comptes, numero)
@@ -177,7 +176,6 @@ def retrais(comptes):
 
 def transfer(comptes):
     # recupere le compte bebiteur et crediteur 
-    # CORRECTION : il manquait l'argument 'comptes' dans les 2 appels ci-dessous
     numero_source = saisir_numero_compte_existant(comptes, "numero du compte source : ")
     numero_destination = saisir_numero_compte_existant(comptes, "numero du compte destination : ")
     
