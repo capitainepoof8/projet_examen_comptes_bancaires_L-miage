@@ -3,23 +3,6 @@
 # menbre 2 : Esmel Priscille Ange
 
 
-#debut code le 9 juin /2026
-# creation de la structure de donner et des fonction principal
-#modification 10 juin /2026
-#avance sur les fonctions
-#=============structure code =========================
-
-#===== AGENCE CESAG BANK =====
-# 1. Afficher tous les comptes
-# 2. Consulter le solde d'un compte
-# 3. Creer un nouveau compte
-# 4. Effectuer un depot
-# 5. Effectuer un retrait
-# 6. Effectuer un transfert entre deux comptes
-# 7. Quitter
-#==============================
-# Votre choix :
-
 # execute test : python group_1_comptes_bancaires.py
 #================================ INPORTANT =================================
 #si tu fais des modification du code tu a juste a faire :
@@ -115,7 +98,6 @@ def solde_valide():
 
 def consulter_solde(comptes):
     #demende d'un compte existants puis ont  affichons le solde
-    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous (le code plantait avec une TypeError)
     numero = saisir_numero_compte_existant(comptes, "numero du compte : ")
     compte = trouver_compte(comptes,numero)
     print("======================================*************  bonjour  ************==================================================================")
@@ -132,7 +114,7 @@ def plus_numero():
 
 def nouveau_compte(titulaire, solde):
     nouveau_numero = plus_numero() + 1
-    nouveau_compte = {"numero": nouveau_numero, "titulaire": titulaire, "solde": solde}
+    nouveau_compte = {"numero": nouveau_numero,"titulaire": titulaire, "solde": solde}
     comptes.append(nouveau_compte)
     print("felicitation pour votre compte créé : numero", nouveau_compte["numero"], titulaire ,solde,"cfa")
     
@@ -172,7 +154,7 @@ def retrais(comptes):
         print(compte["solde"], "cfa")
     
 # fais  j'esserais de simplifier le plus pour que tu comprennne 
-#mais simplement cest pour la 6 option qui dit un transfere entre des compte de la meme entreprise
+#mais simplement c'est pour la 6 option qui dit un transfere entre des compte de la meme entreprise
 
 def transfer(comptes):
     # recupere le compte bebiteur et crediteur 
@@ -200,7 +182,7 @@ def transfer(comptes):
         print("nouveau solde de", source["titulaire"], ":", source["solde"], "cfa")
         print("nouveau solde de", destination["titulaire"], ":", destination["solde"], "cfa")
 
-# executeur main  dui a pour but de nous permetre de naviguer a travers nos option: choix
+# executeur main   a pour but de nous permetre de naviguer a travers nos option: choix
 def main():
     print("====================****** Bienvenue à l'Agence CESAG BANK *******========================")
     quitter = False
@@ -224,6 +206,6 @@ def main():
             print("=========================À bientôt======================")
             quitter = True
 
-# ce ci  na pas but foncierement a obligatoire elle permet juste de faire une inportation du projet donc tu a le choix si ont enleve ou pas
+# ce ci  n'est pas obligatoire mais permet executer l'ensemble facilement (au cas ou tu pourra lance directement une fois telecharger sans rentrer dans ton editeur de code)
 if __name__ == "__main__":
     main()
