@@ -1,13 +1,13 @@
+# non et premon goupe 1:
+# menbre 1 : Soro Nontie Emmanuel
+# menbre 2 : Esmel Priscille Ange
+
+
 #debut code le 9 juin /2026
 # creation de la structure de donner et des fonction principal
 #modification 10 juin /2026
 #avance sur les fonctions
 #=============structure code =========================
-
-# base de donnee
-# -----------------------la fonctions menu
-# -----------------------la fonction de choix
-
 
 #===== AGENCE CESAG BANK =====
 # 1. Afficher tous les comptes
@@ -65,7 +65,7 @@ def trouver_compte( comptes,numero):
     return None
 
 
-def saisir_numero_compte_existant(message):
+def saisir_numero_compte_existant(comptes,message):
     numero = input(message)
     while not numero.isdigit() or trouver_compte(comptes, int(numero)) is None:
         print("ce compte n'existe pas")
@@ -113,11 +113,13 @@ def solde_valide():
     return solde
 
 
-def consulter_solde():
+def consulter_solde(comptes):
     #demende d'un compte existants puis ont  affichons le solde
-    numero = saisir_numero_compte_existant("numero du compte : ")
+    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous (le code plantait avec une TypeError)
+    numero = saisir_numero_compte_existant(comptes, "numero du compte : ")
     compte = trouver_compte(comptes,numero)
-    print("\n================votre solde", compte["titulaire"], ":", compte["solde"], "cfa===============================")
+    print("====================================== bonjour ===========================================")
+    print("\n================  compte utilisateur :", compte["titulaire"]," votre solde est de :", compte["solde"], "cfa===============================")
 
 def plus_numero():
     # cherche le plus grand numero de compte existant
@@ -132,11 +134,10 @@ def nouveau_compte(titulaire, solde):
     nouveau_numero = plus_numero() + 1
     nouveau_compte = {"numero": nouveau_numero, "titulaire": titulaire, "solde": solde}
     comptes.append(nouveau_compte)
-    print("bravo, compte créé : numero",nouveau_compte["numero"],)
-    print(titulaire ,solde,"cfa")
+    print("felicitation pour votre compte créé : numero", nouveau_compte["numero"], titulaire ,solde,"cfa")
+    
 
-
-def creer_un_compte():
+def creer_un_compte(comptes):
     titulaire = input("non du client: ")
     # si lutisisateur fais entrer sans renseigner de valeurs dans la console
     while titulaire.strip()=="":
@@ -146,19 +147,21 @@ def creer_un_compte():
     nouveau_compte(titulaire, solde)
 
 
-def depot():
+def depot(comptes):
     # ont recupere le compte si valide ont credite (depose de largent ) le compte
-    numero = saisir_numero_compte_existant("numero du compte a credite : ")
+    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous
+    numero = saisir_numero_compte_existant(comptes, "numero du compte a credite : ")
     montant = saisir_montant_positif("montant a deposer : ")
     compte = trouver_compte(comptes, numero)
     compte["solde"] = compte["solde"] + montant
-    print("depot effectué. nouveau solde de", compte["titulaire"],)
-    print(compte["solde"], "cfa")
+    print("depot effectué.",)
+    print("votre nouveau solde est de :",compte["titulaire"], ":", compte["solde"], "cfa")
 
 
-def retrais():
+def retrais(comptes):
     #ont recupere les le compte  a debiter puis ont valide le retrais 
-    numero = saisir_numero_compte_existant("numero du compte a debiter : ")
+    # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous
+    numero = saisir_numero_compte_existant(comptes, "numero du compte a debiter : ")
     montant = saisir_montant_positif("montant a retirer : ")
     compte = trouver_compte(comptes, numero)
     if montant > compte["solde"]:
@@ -172,16 +175,21 @@ def retrais():
 # fais  j'esserais de simplifier le plus pour que tu comprennne 
 #mais simplement cest pour la 6 option qui dit un transfere entre des compte de la meme entreprise
 
-def transfer():
+def transfer(comptes):
     # recupere le compte bebiteur et crediteur 
-    numero_source = saisir_numero_compte_existant("numero du compte source : ")
-    numero_destination = saisir_numero_compte_existant("numero du compte destination : ")
+    # CORRECTION : il manquait l'argument 'comptes' dans les 2 appels ci-dessous
+    numero_source = saisir_numero_compte_existant(comptes, "numero du compte source : ")
+    numero_destination = saisir_numero_compte_existant(comptes, "numero du compte destination : ")
+    
     # ont verifie si si l'utilusateur entre les meme compte si oui ont luis dit c'st pas possible
+    
     while numero_destination == numero_source:
         print("Erreur : la destination doit etre differente de la source.")
-        numero_destination = saisir_numero_compte_existant("numero du compte destination : ")
+        numero_destination = saisir_numero_compte_existant(comptes, "numero du compte destination : ")
     montant = saisir_montant_positif("montant a transferer : ")
+    
 # si compte existe alors ont doit verifier si il peut etre debiter  si oui ont accepete l'operation
+
     source = trouver_compte(comptes, numero_source)
     destination = trouver_compte(comptes, numero_destination)
 
@@ -204,15 +212,15 @@ def main():
         if choix == 1 :
             afficher_comptes(comptes)
         elif choix == 2:
-            consulter_solde()
+            consulter_solde(comptes)
         elif choix==3:
-            creer_un_compte()
+            creer_un_compte(comptes)
         elif choix==4:
-            depot()
+            depot(comptes)
         elif choix==5:
-            retrais()
+            retrais(comptes)
         elif choix==6:
-            transfer()
+            transfer(comptes)
         elif choix ==7:
             print("===============Merci d'avoir utilisé CESAG BANK================")
             print("=========================À bientôt======================")
