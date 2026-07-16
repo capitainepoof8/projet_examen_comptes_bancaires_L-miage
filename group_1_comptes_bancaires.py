@@ -88,13 +88,13 @@ def saisir_montant_positif(message):
     return montant
 
 def afficher_comptes(comptes):
-    print("=========================les differents comptes==============================")
+    print("========================= les comptes chez nous ==============================")
     for compte in comptes:
         print(compte["numero"], compte["titulaire"], compte["solde"],"cfa")
  
 def consulter_solde():
     for compte in comptes:
-        print("======================votre solde", compte["titulaire"],"==========================")
+        print("====================== votre solde", compte["titulaire"]," ==========================")
 
 # verifie le solde du compte
 def solde_valide():
@@ -118,7 +118,7 @@ def consulter_solde(comptes):
     # CORRECTION : il manquait l'argument 'comptes' dans l'appel ci-dessous (le code plantait avec une TypeError)
     numero = saisir_numero_compte_existant(comptes, "numero du compte : ")
     compte = trouver_compte(comptes,numero)
-    print("====================================== bonjour ===========================================")
+    print("======================================*************  bonjour  ************==================================================================")
     print("\n================  compte utilisateur :", compte["titulaire"]," votre solde est de :", compte["solde"], "cfa===============================")
 
 def plus_numero():
@@ -202,7 +202,7 @@ def transfer(comptes):
 
 # executeur main  dui a pour but de nous permetre de naviguer a travers nos option: choix
 def main():
-    print("====================Bienvenue à l'Agence CESAG BANK========================")
+    print("====================****** Bienvenue à l'Agence CESAG BANK *******========================")
     quitter = False
     while not quitter:
         menu()
