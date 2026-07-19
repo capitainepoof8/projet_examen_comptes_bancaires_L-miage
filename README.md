@@ -31,4 +31,4 @@ le programe dois permetre d'afficher le menu en dessous et une boucle continue j
 
 ## Fichier
  
-- `group_1_comptes_bancaires.py` — code source unique du projet
+- `group_1_comptes_bancaires.py` 
