@@ -1,13 +1,13 @@
 # Application de Gestion de Comptes Bancaires " CESAG BANK "
 Examin python 60 % 
-profsseur :  Mr Lionnel Patrick DOOKO
+Professeur : M. Lionel Patrick DOOKO
 
 #menbre:
  - Soro Nontie Emmanuel
  - Esmel Priscille Ange
 # objectif
 
-le programe dois permetre d'afficher le menu en dessous et une boucle continue jusqu'à ce que l'utilisateur choisisse de quitter
+Le programme doit permettre d'afficher le menu ci-dessous et de fonctionner dans une boucle continue jusqu'à ce que l'utilisateur choisisse de quitter.
 ```
 ===== AGENCE CESAG BANK =====
 1. Afficher tous les comptes
