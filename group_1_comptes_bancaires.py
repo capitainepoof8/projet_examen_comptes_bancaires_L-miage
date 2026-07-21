@@ -100,8 +100,8 @@ def consulter_solde(comptes):
     #demende d'un compte existants puis ont  affichons le solde
     numero = saisir_numero_compte_existant(comptes, "numero du compte : ")
     compte = trouver_compte(comptes,numero)
-    print("======================================*************  bonjour  ************==================================================================")
-    print("\n================  compte utilisateur :", compte["titulaire"]," votre solde est de :", compte["solde"], "cfa===============================")
+    print("\n======================================*************  bonjour  ************=============================================")
+    print("================  compte utilisateur :", compte["titulaire"],", votre solde est de :", compte["solde"], "cfa===============================")
 
 def plus_numero():
     # cherche le plus grand numero de compte existant
@@ -178,6 +178,7 @@ def transfer(comptes):
     else:
         source["solde"] = source["solde"] - montant
         destination["solde"] = destination["solde"] + montant
+        print("==================================================================")
         print("transfert effectué :", montant, "cfa de", source["titulaire"], "vers", destination["titulaire"])
         print("nouveau solde de", source["titulaire"], ":", source["solde"], "cfa")
         print("nouveau solde de", destination["titulaire"], ":", destination["solde"], "cfa")
