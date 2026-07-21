@@ -2,12 +2,12 @@
 Examin python 60 % 
 Professeur : M. Lionel Patrick DOOKO
 
-#menbre:
+# menbre:
  - Soro Nontie Emmanuel
  - Esmel Priscille Ange
 # objectif
 
-Le programme doit permettre d'afficher le menu ci-dessous et de fonctionner dans une boucle continue jusqu'à ce que l'utilisateur choisisse de quitter.
+Le programme doit permettre d'afficher le menu ci-dessous et de fonctionner dans une boucle continue jusqu'à ce que l'utilisateur choisisse de quitter.a note execution uniquement dans cmd
 ```
 ===== AGENCE CESAG BANK =====
 1. Afficher tous les comptes
